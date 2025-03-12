@@ -21,7 +21,7 @@ spec:
         tier: web
         project: expense
     spec:
-      conatiners:
+      containers:
       - name: frontend
         image: naveenrajoli/frontend:1.2
         ports:
