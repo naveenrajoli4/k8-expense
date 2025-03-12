@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: backend
+  namespace: rnk-expense
+  labels:
+    app: backend
+    tier: backend
+    project: expense
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      tier: backend
+      project: expense
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: backend
+        project: expense
+    spec:
+      containers:
+      - name: backend
+        image: naveenrajoli/backend:1.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+  namespace: rnk-expense
+spec:
+  selector:
+    app: backend
+    tier: backend
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+
