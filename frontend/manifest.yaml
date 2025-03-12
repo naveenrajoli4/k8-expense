@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: frontend
+  namespace: rnk-expense
+  labels:
+    app: frontend
+    tier: web
+    project: expense
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+      tier: web
+      project: expense
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: web
+        project: expense
+    spec:
+      conatiners:
+      - name: frontend
+        image: naveenrajoli/frontend:1.2
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+  namespace: rnk-expense
+spec:
+  type: LoadBalancer
+  selector: 
+    app: frontend
+    tier: web
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+
+
