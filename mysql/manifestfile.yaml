@@ -1,5 +1,5 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: mysql
   namespace: rnk-expense
@@ -9,18 +9,19 @@ metadata:
     project: expense
 spec:
   replicas: 1
-  selectors:
+  selector:
     matchLabels:
       app: mysql
       tier: database
       project: expense
   template:
     metadata: 
-      app: mysql
-      tier: database
-      project: expense
+      labels:
+        app: mysql
+        tier: database
+        project: expense
     spec:
-      contaibers:
+      containers:
         - name: mysql
           image: naveenrajoli/mysql:1.0
 
